@@ -66,4 +66,48 @@ roomRouter.post("/add", (req, res) => {
   }
 });
 
+// Endpoint to update a room
+roomRouter.put("/edit/:id", (req, res) => {
+  const roomId = parseInt(req.params.id);
+  const updatedRoom = req.body;
+  console.log(roomId);
+  const roomIndex = rooms.findIndex((room) => room.id === roomId);
+
+  if (roomIndex === -1) {
+    return res.status(404).send("Room not found");
+  }
+
+  const { name, seats, amenities, price } = updatedRoom;
+  if (!name || !seats || !amenities || !price) {
+    return res
+      .status(400)
+      .send("Please input all fields: Name, Seats, Amenities, Price");
+  }
+
+  rooms[roomIndex] = { id: roomId, ...updatedRoom };
+
+  return res.json({
+    message: "Successfully updated the room",
+    data: rooms[roomIndex],
+  });
+});
+
+// Endpoint to delete a room
+roomRouter.delete("/delete/:id", (req, res) => {
+  const roomId = parseInt(req.params.id);
+
+  const roomIndex = rooms.findIndex((room) => room.id === roomId);
+
+  if (roomIndex === -1) {
+    return res.status(404).send("Room not found");
+  }
+
+  const deletedRoom = rooms.splice(roomIndex, 1);
+
+  return res.json({
+    message: "Successfully deleted the room",
+    data: deletedRoom[0],
+  });
+});
+
 export default roomRouter;
