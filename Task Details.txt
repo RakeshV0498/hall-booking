@@ -1,0 +1,16 @@
+
+
+Render URL: http://hall-booking-89ie.onrender.com/
+
+Endpoints: 
+
+/rooms/all (GET) - Show all created rooms
+/rooms/add (POST) - Add a new room
+/booking/create-new (POST) - Book a room
+/bookings/all (GET) - List all rooms with booked data
+/bookings/customers-details (GET) - List all customers with booked data
+/bookings/booking-details (GET) - List how many times a customer has booked the room with detailed information
+
+Github Repo - https://github.com/RakeshV0498/hall-booking.git 
+
+PostMan Documentaion - https://documenter.getpostman.com/view/35033389/2sA3QqgtGm 
