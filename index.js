@@ -1,4 +1,6 @@
 import express from "express";
+import roomRouter from "./routes/rooms.js";
+import bookingRouter from "./routes/booking.js";
 
 const port = 8101;
 
@@ -6,20 +8,11 @@ const server = express();
 
 server.use(express.json());
 
-let rooms = [];
+// Mounting roomRouter and bookingRouter to their respective endpoints
+server.use("/rooms", roomRouter);
+server.use("/bookings", bookingRouter);
 
-server.get("/rooms/all", (req, res) => {
-  res.send(`No of available rooms ${rooms.length}`);
-});
-
-server.post("/rooms/add", (req, res) => {
-  const requestBody = req.body;
-  // To check if all the fields are filled.
-  console.log(req.body);
-  res.send(req.body);
-});
-
+// Start the server
 server.listen(port, () => {
-  console.log(`Server started in port : ${port}
-listening in http://localhost:${port}`);
+  console.log(`${new Date()} : Server started on port: ${port}`);
 });
